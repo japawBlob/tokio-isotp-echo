@@ -11,11 +11,9 @@ async fn main() -> Result<(), Error> {
             
     let _ = rx.write_packet(vec![1,2,3])?.await;
 
+    println!("1 2 3 sent");
 
-    println!("done");
     while let Ok(mut packet) = rx.read_packet()?.await {
-        println!("{:?}", packet);
-        packet.push(0xff);
         println!("{:?}", packet);
         let blob = rx.write_packet(packet)?.await;
     }
